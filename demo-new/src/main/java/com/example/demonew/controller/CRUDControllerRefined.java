@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demonew.model.Item;
 import com.example.demonew.service.ItemService;
-import com.example.demonew.service.ItemServiceAnalysis;
 import com.example.demonew.util.ResponseEntityUtil;
 import com.example.demonew.validation.ItemValidation;
 
@@ -24,11 +23,9 @@ import com.example.demonew.validation.ItemValidation;
 public class CRUDControllerRefined {
 
     private final ItemService itemService;
-    private final ItemServiceAnalysis itemServiceAnalysis;
     
-    public CRUDControllerRefined(ItemService itemService, ItemServiceAnalysis itemServiceAnalysis) {
+    public CRUDControllerRefined(ItemService itemService) {
         this.itemService = itemService;
-        this.itemServiceAnalysis = itemServiceAnalysis;
     }
 
     // --- CREATE (Auto-generated ID) ---
@@ -55,7 +52,7 @@ public class CRUDControllerRefined {
     
     @GetMapping("/getDemoOnly")
     public ResponseEntity<List<Item>> getDemoOnly() {
-        return ResponseEntity.ok(itemServiceAnalysis.getAllItemsWithDemo());
+        return ResponseEntity.ok(itemService.getDemoOnly());
     }
 
     // --- UPDATE ---

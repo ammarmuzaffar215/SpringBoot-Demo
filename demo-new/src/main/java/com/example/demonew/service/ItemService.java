@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,13 @@ public class ItemService {
 	    return dataStore.entrySet().stream()
 	            .map(entry -> new Item(entry.getKey(), entry.getValue()))
 	            .toList();  
+	}
+	
+	public List<Item> getDemoOnly() {
+	    return dataStore.entrySet().stream()
+	    		.filter(entry -> entry.getValue().contains("demo"))
+                .map(entry -> new Item(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
 	}
 
     public Optional<Item> updateItem(Long id, String newValue) {
