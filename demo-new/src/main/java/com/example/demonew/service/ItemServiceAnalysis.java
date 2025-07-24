@@ -1,7 +1,6 @@
 package com.example.demonew.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -33,7 +32,7 @@ public class ItemServiceAnalysis {
         return Data.getDataStore().entrySet().stream()
                 .filter(entry -> entry.getValue().contains("demo"))
                 .map(entry -> new Item(entry.getKey(), entry.getValue()))
-                .collect(Collectors.toList());
+                .toList();
     }
 }
 

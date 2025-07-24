@@ -5,11 +5,10 @@ import com.example.demonew.model.Item;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 import com.example.demonew.service.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @RestController
 @RequestMapping("/demo/v1") // Base path for all endpoints in this controller
 
@@ -44,13 +46,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class CRUDController {
 
-    private final AtomicLong idCounter = new AtomicLong();
     private final ItemServiceAnalysis itemServiceAnalysis;
 
-    @Autowired
-    public CRUDController(ItemServiceAnalysis itemServiceAnalysis) {
-        this.itemServiceAnalysis = itemServiceAnalysis;
-    }
+//    @Autowired
+//    public CRUDController(ItemServiceAnalysis itemServiceAnalysis) {
+//        this.itemServiceAnalysis = itemServiceAnalysis;
+//    }
 
 	// --- CREATE (HTTP POST) ---
 	@PostMapping
@@ -60,7 +61,7 @@ public class CRUDController {
 																										// Request if
 																										// name is empty
 		}
-		long newId = idCounter.incrementAndGet();
+		long newId = Data.getIdCounter().incrementAndGet();
 		Data.getDataStore().put(newId, newItemName);
 		// Returning the ID and the data for confirmation
 		return new ResponseEntity<>("Item created successfully with ID: " + newId + " and data: " + newItemName,
@@ -72,7 +73,6 @@ public class CRUDController {
 	// --- READ (HTTP GET) ---
 	@GetMapping
 	public ResponseEntity<Map<Long, String>> getAllItems() {
-
 		return new ResponseEntity<>(Data.getDataStore(), HttpStatus.OK); // 200 OK
 	}
 
