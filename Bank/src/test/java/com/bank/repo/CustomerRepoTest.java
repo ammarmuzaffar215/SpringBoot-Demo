@@ -27,7 +27,7 @@ import com.bank.entity.CustomerEntity;
     @Order(1)
     void testCreateCustomer() {
         CustomerEntity customer = new CustomerEntity();
-        customer.setIcNumber("IC123456");
+        customer.setIcNumber("IC123456-" + System.nanoTime());        
         customer.setLastname("Doe");
         customer.setSurname("John");
         customer.setDescription("Test customer");
