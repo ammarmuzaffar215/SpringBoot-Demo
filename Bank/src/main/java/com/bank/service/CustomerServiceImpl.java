@@ -28,11 +28,9 @@ public class CustomerServiceImpl implements ICustomerService {
     @Transactional()
     @Override
     public Optional<CustomerEntity> getCustomerById(Long id) {
-    	                                   
-    	Optional<CustomerEntity>  customer = customerRepo.findById(id);
-
-    	return customer;
+        return customerRepo.findById(id);
     }
+
 
     @Override
     public List<CustomerEntity> getAllCustomers() {
